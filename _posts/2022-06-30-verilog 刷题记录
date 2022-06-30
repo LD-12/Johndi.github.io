@@ -1,1 +1,41 @@
-
+一、四选一多路器
+通过波形图去看，哪一个对应哪一个图
+`timescale 1ns/1ns
+module mux4_1(
+input [1:0]d1,d2,d3,d0,
+input [1:0]sel,
+output[1:0]mux_out
+);
+//*************code***********//
+    reg[1:0] mux_out_reg;
+    always @(*)
+        begin
+            case(sel)
+            2'd0: mux_out_reg = d3;
+            2'd1: mux_out_reg = d2;       
+            2'd2: mux_out_reg = d1;            
+            2'd3: mux_out_reg = d0;
+            default: mux_out_reg = d0;
+            endcase
+        end
+    
+    assign mux_out = mux_out_reg;
+    
+    这道题里面注意begin end里面要使用reg类型，不能使用wire类型，所以使用了一个中间的reg的mux_out_reg中间过渡变量，也可以使用if else语句
+   也可以使用三目运算符
+   assign a = b ? c :d;
+   等同于if( b== 1'b1)
+   a = c； else a = d;
+   
+   
+   二、异步复位的串联T触发器
+   首先什么是异步复位的触发器
+   在数字电路中，异步复位的上升沿D触发器的逻辑电路符号如下图所示，其功能表如下表所示。
+   其工作原理为：只要复位控制端口的信号有效(为0)，D 触发器就会立即进行复位操作，与时钟信号无关。当复位端置1时，在时钟信号的上升沿到来时，输入端口D的数据将传递给输出端口Q和输出端口~Q。
+   学习地址：https://blog.csdn.net/StormBorn0301/article/details/118864475
+   
+   
+   
+ 
+   
+   
